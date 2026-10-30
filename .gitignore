@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+.GitBase/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build and test output
+dist/
+build/
+coverage/
+
+# Operating system files
+desktop.ini
+Thumbs.db
