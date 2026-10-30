@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 
 async function initRepo() {
-  const repoPath = path.resolve(process.cwd(), ".GitBase");
+  const repoPath = path.resolve(process.cwd(), ".gitBase");
   const commitsPath = path.join(repoPath, "commits");
 
   try {
