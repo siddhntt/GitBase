@@ -14,6 +14,7 @@ const { commitRepo } = require("./controllers/commit");
 const { pushRepo } = require("./controllers/push");
 const { pullRepo } = require("./controllers/pull");
 const { revertRepo } = require("./controllers/revert");
+const { Server } = require("socket.io");
 
 dotenv.config();
 
@@ -66,7 +67,7 @@ yargs(hideBin(process.argv))
   .help().argv;
 
 function startServer() {
-  const app = expresS();
+  const app = express();
   const port = process.env.PORT || 3000;
 
   app.use(bodyParser.json());
@@ -77,4 +78,40 @@ function startServer() {
     .connect(mongoURI)
     .then(() => console.log("MongoDB connected!"))
     .catch((err) => console.error("Unable to connect to MongoDB: ", err));
+
+  app.use(cors({ origin: "*" }));
+
+  app.get("/", (req, res) => {
+    res.send("Welcome!");
+  });
+
+  let user = "test";
+
+  const httpServer = http.createServer(app);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
+
+  io.on("connection", (socket) => {
+    socket.on("joinRoom", (userID) => {
+      user = userID;
+      console.log("=====");
+      console.log(user);
+      console.log("=====");
+      socket.join(userID);
+    });
+  });
+
+  const db = mongoose.connection;
+
+  db.once("open", async () => {
+    console.log("CRUD operations called");
+  });
+
+  httpServer.listen(port, () => {
+    console.log(`Server is running on PORT ${port}`);
+  });
 }
