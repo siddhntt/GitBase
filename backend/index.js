@@ -15,6 +15,7 @@ const { pushRepo } = require("./controllers/push");
 const { pullRepo } = require("./controllers/pull");
 const { revertRepo } = require("./controllers/revert");
 const { Server } = require("socket.io");
+const mainRouter = require("./routes/main.router");
 
 dotenv.config();
 
@@ -75,15 +76,13 @@ function startServer() {
 
   const mongoURI = process.env.MONGODB_URI;
   mongoose
-    .connect(mongoURI)
+    .connect(mongoURI, { dbName: "GitBase" })
     .then(() => console.log("MongoDB connected!"))
     .catch((err) => console.error("Unable to connect to MongoDB: ", err));
 
   app.use(cors({ origin: "*" }));
 
-  app.get("/", (req, res) => {
-    res.send("Welcome!");
-  });
+  app.use("/", mainRouter);
 
   let user = "test";
 

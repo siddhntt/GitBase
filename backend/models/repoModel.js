@@ -19,17 +19,17 @@ const RepositorySchema = new Schema({
     type: Boolean,
   },
   owner: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   issues: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Issue",
     },
   ],
 });
 
 const Repository = mongoose.model("Repository", RepositorySchema);
-export default Repository;
+module.exports = Repository;
