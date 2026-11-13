@@ -12,6 +12,7 @@
   "dependencies": {
     "@primer/primitives": "^11.10.0",
     "@primer/react": "^38.45.0",
+    "@uiw/react-heat-map": "^2.3.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.5"
