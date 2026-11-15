@@ -25,7 +25,7 @@ async function createIssue(req, res) {
 
 async function updateIssueById(req, res) {
   const { id } = req.params;
-  const { title, decription, status } = req.body;
+  const { title, description, status } = req.body;
 
   try {
     const issue = await Issue.findById(id);
@@ -34,13 +34,13 @@ async function updateIssueById(req, res) {
       return res.status(404).json({ error: "Issue not found!" });
     }
 
-    issue.title = title;
-    issue.description = descrition;
-    issue.status = status;
+    if (title !== undefined) issue.title = title;
+    if (description !== undefined) issue.description = description;
+    if (status !== undefined) issue.status = status;
 
     await issue.save();
 
-    res.json(issue, {message:"Issue updated!"});
+    res.json({ message: "Issue updated!", issue });
   } catch (err) {
     console.error("Error during issue updation: ", err.message);
     res.status(500).send("Server error!");
@@ -50,11 +50,13 @@ async function updateIssueById(req, res) {
 async function deleteIssueById(req, res) {
   const { id } = req.params;
   try {
-    const issue = Issue.findByIdAndDelete(id);
+    const issue = await Issue.findByIdAndDelete(id);
 
     if (!issue) {
       return res.status(404).json({ error: "Issue not found!" });
     }
+
+    res.json({ message: "Issue deleted successfully!" });
   } catch (err) {
     console.error("Error during issue deletion: ", err.message);
     res.status(500).send("Server error!");
@@ -64,13 +66,13 @@ async function deleteIssueById(req, res) {
 async function getAllIssues(req, res) {
   const { id } = req.params;
   try {
-    const issue = Issue.find({ repository: id });
+    const issues = await Issue.find({ repository: id });
 
-    if (!issue) {
-      return res.status(404).json({ error: "Issue not founf!" });
+    if (!issues || issues.length === 0) {
+      return res.status(200).json([]);
     }
 
-    res.status(200).json(issue);
+    res.status(200).json(issues);
   } catch (err) {
     console.error("Error during issue fetching: ", err.message);
     res.status(500).send("Server error!");

@@ -78,13 +78,13 @@ async function fetchRepositoryByName(req, res) {
 }
 
 async function fetchRepositoryForCurrentUser(req, res) {
-  const userId = req.user;
+  const userId = req.params.userID;
 
   try {
     const repositories = await Repository.find({ owner: userId });
 
     if (!repositories || repositories.length == 0) {
-      return res.status(404).json({ error: "User Repositories not found!" });
+      return res.status(200).json({ message: "No repositories found.", repositories: [] });
     }
 
     res.json({ message: "Repositories found!", repositories });

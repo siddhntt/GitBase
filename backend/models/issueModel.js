@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { default: Repository } = require("./repoModel");
 const { Schema } = mongoose;
 
 const IssueSchema = new Schema({

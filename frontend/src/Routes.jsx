@@ -4,8 +4,13 @@ import { useNavigate, useRoutes } from "react-router-dom";
 //Page list
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/user/Profile";
+import Settings from "./components/user/Settings";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import CreateRepo from "./components/repo/CreateRepo";
+import RepoDetail from "./components/repo/RepoDetail";
+import CreateIssue from "./components/issue/CreateIssue";
+import IssueDetail from "./components/issue/IssueDetail";
 
 //Auth Context
 import { useAuth } from "./authContext";
@@ -49,6 +54,26 @@ const ProjectRoutes = () => {
     {
       path: "/profile",
       element: <Profile />,
+    },
+    {
+      path: "/settings",
+      element: <Settings />,
+    },
+    {
+      path: "/create",
+      element: <CreateRepo />,
+    },
+    {
+      path: "/repo/:id",
+      element: <RepoDetail />,
+    },
+    {
+      path: "/repo/:id/issues/new",
+      element: <CreateIssue />,
+    },
+    {
+      path: "/issue/:id",
+      element: <IssueDetail />,
     },
   ]);
 
