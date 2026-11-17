@@ -2,10 +2,15 @@
 
 A full-stack GitHub-inspired platform built with React and Node.js. Create repositories, track issues, manage your profile — all with a clean dark-themed UI.
 
+**🌐 Live Demo:** [https://main.d217zv60rf3cng.amplifyapp.com/](https://main.d217zv60rf3cng.amplifyapp.com/)
+
 ![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?logo=node.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)
+![AWS Amplify](https://img.shields.io/badge/AWS_Amplify-Deployment-FF9900?logo=awsamplify&logoColor=white)
+![AWS EC2](https://img.shields.io/badge/AWS_EC2-Backend-FF9900?logo=amazonec2&logoColor=white)
+![AWS S3](https://img.shields.io/badge/AWS_S3-Storage-569A31?logo=amazons3&logoColor=white)
 
 ---
 
@@ -25,11 +30,21 @@ A full-stack GitHub-inspired platform built with React and Node.js. Create repos
 | Layer | Tech |
 |-------|------|
 | Frontend | React 19, React Router, Primer React, Vite |
+| Frontend Hosting | AWS Amplify (Automated CI/CD) |
 | Backend | Express 5, Node.js, yargs CLI |
+| Backend Hosting | AWS EC2 |
 | Database | MongoDB Atlas, Mongoose |
 | Auth | JWT, bcryptjs |
-| Storage | AWS S3 (for push/pull) |
+| Object Storage | AWS S3 (for push/pull commit archives) |
 | Real-time | Socket.io |
+
+## Architecture & Deployment
+
+- **Frontend Deployment (AWS Amplify)**: The React SPA is hosted and deployed using AWS Amplify, configured with automated build and deployment pipelines triggered on code pushes.
+  - **Live URL**: [https://main.d217zv60rf3cng.amplifyapp.com/](https://main.d217zv60rf3cng.amplifyapp.com/)
+- **Backend Services (AWS EC2)**: The Express REST API and Socket.io server run on an AWS EC2 instance, managing core database interactions, user sessions, and repository operations.
+- **Database (MongoDB Atlas)**: Cloud-hosted MongoDB cluster handling data persistence for users, repositories, and issue tracking.
+- **Commit Storage (AWS S3)**: Cloud object storage utilized by GitBase CLI commands (`push` / `pull`) to archive and sync project commit snapshots across machines.
 
 ## Project Structure
 

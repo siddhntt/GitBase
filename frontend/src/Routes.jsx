@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
 
 //Page list
-import Home from "./components/home/Home";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/user/Profile";
 import Settings from "./components/user/Settings";
@@ -35,11 +34,11 @@ const ProjectRoutes = () => {
   let element = useRoutes([
     {
       path: "/",
-      element: currentUser ? <Dashboard /> : <Home />,
+      element: <Dashboard />,
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
+      element: currentUser ? <Dashboard /> : <Login />,
     },
     {
       path: "/auth",

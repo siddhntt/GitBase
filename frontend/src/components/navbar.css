@@ -71,6 +71,21 @@ nav .nav-links .nav-create-btn:hover {
   background: var(--gb-accent-green-hover);
 }
 
+.nav-logout {
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gb-text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.nav-logout:hover {
+  color: var(--gb-text);
+  background: var(--gb-bg-tertiary);
+}
+
 @media screen and (max-width: 600px) {
   nav {
     padding: 0 12px;
