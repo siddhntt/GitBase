@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
 
 //Page list
+import Home from "./components/home/Home";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/user/Profile";
 import Settings from "./components/user/Settings";
@@ -26,21 +27,18 @@ const ProjectRoutes = () => {
       setCurrentUser(userIdFromStorage);
     }
 
-    if (
-      !userIdFromStorage &&
-      !["/auth", "/signup"].includes(window.location.pathname)
-    ) {
-      navigate("/auth");
-    }
-
-    if (userIdFromStorage && window.location.pathname == "/auth") {
-      navigate("/");
+    if (userIdFromStorage && window.location.pathname === "/auth") {
+      navigate("/dashboard");
     }
   }, [currentUser, navigate, setCurrentUser]);
 
   let element = useRoutes([
     {
       path: "/",
+      element: currentUser ? <Dashboard /> : <Home />,
+    },
+    {
+      path: "/dashboard",
       element: <Dashboard />,
     },
     {

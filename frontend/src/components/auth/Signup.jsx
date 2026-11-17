@@ -33,7 +33,7 @@ const Signup = () => {
       setCurrentUser(res.data.userId);
       setLoading(false);
 
-      window.location.href = "/";
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error(err);
       alert("Signup Failed!");
